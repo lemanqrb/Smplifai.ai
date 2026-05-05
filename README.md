@@ -1,2 +1,3 @@
 # Smplifai.ai
 Bu sənəd **Smplifai** platformasının funksional məntiqini, iş axınlarını və sistem komponentlərini QA komandasının test ssenarilərini (test cases) rahatlıqla hazırlaya bilməsi üçün ətraflı şəkildə izah edir.
+Smplifai platforması universitet müraciət prosesində tələbələrin qarşılaşdığı sənəd işlərini sadələşdirmək məqsədilə yaradılmışdır. Ən böyük çətinliklərdən biri müraciət zamanı çoxsaylı PDF formalarının əl ilə doldurulmasıdır. Platforma süni intellekt texnologiyalarından istifadə edərək bu sənədləri avtomatik şəkildə tamamlayır, beləliklə prosesi daha sürətli, rahat və daha az səhv ilə həyata keçirməyə imkan yaradır..
