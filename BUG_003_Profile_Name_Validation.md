@@ -2,7 +2,7 @@
 
 | Field | Details |
 |-------|---------|
-| **Bug ID** | BUG_3 |
+| **Bug ID** | BUG_003 |
 | **Title** | Profile update accepts special characters in the First Name field |
 | **Description** | The system allows users to enter special characters in the **First Name** field and successfully updates the profile without displaying any validation error. |
 | **Steps to Reproduce** | 1. Navigate to the **Profile** page in the Simplifai frontend.<br>2. Enter **"#$%&*"** in the **First Name** field.<br>3. Leave the phone number unchanged.<br>4. Click the **Send Code** button.<br>5. Leave the email address unchanged.<br>6. Click the **Save Changes** button. |
