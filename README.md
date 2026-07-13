@@ -1,68 +1,66 @@
-# Smplifai.ai
+# 🎓 Smplifai.ai
 
-Bu sənəd **Smplifai.ai** platformasının funksional məntiqini, əsas iş axınlarını və sistem komponentlərini QA komandasının test ssenarilərini (Test Cases) daha düzgün, strukturlaşdırılmış və effektiv şəkildə hazırlaya bilməsi məqsədilə ətraflı şəkildə izah edir.
-
----
-
-## 📌 Platforma Haqqında
-
-**Smplifai.ai** universitet müraciət prosesində tələbələrin və istifadəçilərin qarşılaşdığı mürəkkəb sənəd idarəetmə proseslərini sadələşdirmək üçün hazırlanmış süni intellekt əsaslı platformadır.
-
-Universitet müraciətləri zamanı istifadəçilər çoxsaylı PDF formalarını, müraciət sənədlərini və məlumat sahələrini manual şəkildə doldurmaq məcburiyyətində qalırlar. Bu proses həm vaxt itkisinə səbəb olur, həm də insan səhvlərinin yaranma riskini artırır.
-
-Smplifai.ai platforması müasir süni intellekt texnologiyalarından istifadə edərək istifadəçi məlumatlarını analiz edir və tələb olunan sənədləri avtomatik şəkildə doldurur. Bunun nəticəsində müraciət prosesi:
-
-* Daha sürətli
-* Daha rahat
-* Daha stabil
-* Daha az səhv riski ilə
-
-icra olunur.
+This document provides a detailed overview of the **Smplifai.ai** platform, including its core functionality, primary workflows, and system components. Its purpose is to help the QA team create well-structured, accurate, and effective test cases by providing a clear understanding of how the platform works.
 
 ---
 
-## 🎯 Platformanın Əsas Məqsədi
+## 📌 About the Platform
 
-Platformanın əsas məqsədi universitet müraciət proseslərini avtomatlaşdırmaq və istifadəçilərin sənəd doldurma yükünü minimuma endirməkdir.
+**Smplifai.ai** is an AI-powered platform designed to simplify the complex document management process involved in university applications.
 
-Bu yanaşma aşağıdakı üstünlükləri təmin edir:
+During the university application process, applicants are often required to manually complete numerous PDF forms, application documents, and information fields. This process can be time-consuming and increases the likelihood of human error.
 
-* Manual əməliyyatların azaldılması
-* Məlumat daxil etmə səhvlərinin minimuma endirilməsi
-* Sənəd hazırlama müddətinin qısaldılması
-* İstifadəçi təcrübəsinin (UX) yaxşılaşdırılması
-* Daha effektiv və optimallaşdırılmış müraciət prosesi
+Smplifai.ai leverages modern artificial intelligence technologies to analyze user information and automatically populate the required documents. As a result, the application process becomes:
 
----
-
-## ⚙️ Əsas Funksionallıqlar
-
-Platforma aşağıdakı əsas funksionallıqları əhatə edir:
-
-* PDF sənədlərinin avtomatik doldurulması
-* İstifadəçi məlumatlarının emalı
-* Süni intellekt əsaslı data analizi
-* Müraciət formalarının idarə olunması
-* Fayl yükləmə və sənəd emalı
-* İstifadəçi autentifikasiyası və authorization prosesləri
+- Faster
+- More convenient
+- More reliable
+- Less prone to human error
 
 ---
 
-## 🧪 QA Məqsədi
+## 🎯 Project Goal
 
-Bu sənədin əsas məqsədi QA komandasına aşağıdakı sahələr üzrə test ssenarilərinin hazırlanmasında kömək etməkdir:
+The primary goal of the platform is to automate the university application process and minimize the manual effort required to complete application documents.
 
-* Functional Testing
-* UI/UX Testing
-* API Testing
-* Regression Testing
-* Validation Testing
-* File Upload Testing
-* Error Handling Scenarios
-* End-to-End User Flow Testing
+This approach provides several benefits, including:
+
+- Reducing manual work
+- Minimizing data entry errors
+- Shortening document preparation time
+- Improving the overall user experience (UX)
+- Creating a more efficient and optimized application process
 
 ---
 
-## 💡 Nəticə
+## ⚙️ Core Features
 
-Smplifai.ai platforması universitet müraciət proseslərini daha ağıllı və avtomatlaşdırılmış şəkildə idarə etməyə imkan yaradır. Süni intellekt dəstəyi ilə sənəd doldurma prosesinin optimallaşdırılması həm istifadəçi təcrübəsini yaxşılaşdırır, həm də ümumi sistem effektivliyini artırır.
+The platform includes the following key functionalities:
+
+- Automatic PDF document completion
+- User data processing
+- AI-powered data analysis
+- Application form management
+- File upload and document processing
+- User authentication and authorization
+
+---
+
+## 🧪 QA Objectives
+
+The purpose of this document is to assist the QA team in designing test scenarios for the following testing areas:
+
+- Functional Testing
+- UI/UX Testing
+- API Testing
+- Regression Testing
+- Validation Testing
+- File Upload Testing
+- Error Handling Scenarios
+- End-to-End User Flow Testing
+
+---
+
+## 💡 Conclusion
+
+Smplifai.ai provides a smarter and more automated approach to managing university application processes. By leveraging artificial intelligence to streamline document completion, the platform enhances the user experience while improving overall system efficiency.
