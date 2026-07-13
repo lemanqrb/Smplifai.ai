@@ -1,17 +1,16 @@
-# Bug Report
+# 🐞 Bug Report
 
-| Sahə | Məlumat |
-|------|----------|
+| Field | Details |
+|-------|---------|
 | **Bug ID** | BUG_3 |
-| **Title** | Ad hissəsinə xüsusi simvollar daxil edilməsinə və profil məlumatlarının yenilənməsinə icazə verilir |
-| **Description** | İstifadəçi ad hissəsinə xüsusi simvollar daxil etdikdə sistem həmin məlumatları qəbul edir və profil məlumatlarının yenilənməsinə icazə verir. |
-| **Steps to Reproduce** | 1. Simplifai frontend-də Profile hissəsinə keçid etdim. <br> 2. Ad hissəsinə “#$%&*” daxil etdim. <br> 3. Nömrəni olduğu kimi saxladım. <br> 4. “Send code” buttonuna klik etdim. <br> 5. E-maili olduğu kimi saxladım. <br> 6. “Save changes” buttonuna klik etdim. |
-| **Expected Result** | Error mesajı gəlməlidir. |
-| **Actual Result** | “Profile updated successfully!” bildirisi ekranda görsəndi. |
+| **Title** | Profile update accepts special characters in the First Name field |
+| **Description** | The system allows users to enter special characters in the **First Name** field and successfully updates the profile without displaying any validation error. |
+| **Steps to Reproduce** | 1. Navigate to the **Profile** page in the Simplifai frontend.<br>2. Enter **"#$%&*"** in the **First Name** field.<br>3. Leave the phone number unchanged.<br>4. Click the **Send Code** button.<br>5. Leave the email address unchanged.<br>6. Click the **Save Changes** button. |
+| **Expected Result** | The system should reject the invalid input and display a validation error message. The profile should not be updated. |
+| **Actual Result** | The message **"Profile updated successfully!"** was displayed, and the profile was updated with the invalid value. |
 | **Priority** | Medium |
 | **Severity** | Major |
-| **Status** | Açıq / Təsdiqlənmiş |
-| **Tapılan Vaxt** | 27.05.2026 |
-| **Aşkar edən şəxs** | Ləman Qurbanova |
-| **Əlavələr** | <img width="974" height="466" alt="image" src="https://github.com/user-attachments/assets/c3da3e16-81c1-4b96-b514-244bad49b709" />
- |
+| **Status** | Open / Confirmed |
+| **Date Reported** | 27.05.2026 |
+| **Reported By** | Ləman Qurbanova |
+| **Attachments** | <img width="974" height="466" alt="Bug Screenshot" src="https://github.com/user-attachments/assets/c3da3e16-81c1-4b96-b514-244bad49b709" /> |
