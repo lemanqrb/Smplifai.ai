@@ -1,312 +1,406 @@
-# Simplifai Frontend Testing Report
+# 🧪 Simplifai Frontend Testing Report
 
 ---
 
-## 1. Sign up with valid data
+# 1️⃣ Sign Up with Valid Data
 
-### Description
-Valid məlumatlarla qeydiyyatdan keçmək.
+## 📌 Description
 
-### Steps
-1. Simplifai frontend-də qeydiyyat səhifəsinə keçid etdim
-2. Valid e-mail – “leman.qrb@gmail.com” daxil etdim
-3. Valid name – “Ləman” daxil etdim
-4. Valid password – “LDA0700fr@” daxil etdim
-5. Password-u yenidən daxil etdim
-6. SMPLIFAI's Terms of Use and Privacy Policy checkbox hissəsini qəbul etdim
-7. “Create an account” buttonuna klik etdim
+Verify that a user can successfully register with valid information.
 
-### Expected Result
-İstifadəçi valid məlumatlarla uğurla qeydiyyatdan keçməlidir.
+## 📝 Steps
 
-### Actual Result
-E-mail təsdiqindən sonra istifadəçi əsas səhifəyə yönləndirildi.
+1. Open the Simplifai frontend registration page.
+2. Enter a valid email: **leman.qrb@gmail.com**
+3. Enter a valid first name: **Ləman**
+4. Enter a valid password: **LDA0700fr@**
+5. Re-enter the password.
+6. Accept the **SMPLIFAI Terms of Use and Privacy Policy**.
+7. Click the **Create an account** button.
 
-### Database Check
+## ✅ Expected Result
+
+The user should be successfully registered using valid information.
+
+## ❌ Actual Result
+
+After email verification, the user was redirected to the home page.
+
+## 🗄️ Database Verification
+
 ```sql
-Select * from profiles where first_name = 'Ləman';
+SELECT * FROM profiles
+WHERE first_name = 'Ləman';
 ```
 
-Result:
+**Result**
+
 ```text
-2026-04-14
+Test Date: 2026-04-14
+
 id: a3c38e71-9784-4b8c-81af-9692a2aa8373
 ```
 
+**Status:** ✅ PASS
+
 ---
 
-## 2. Sign up with invalid e-mail
+# 2️⃣ Sign Up with an Invalid Email Address
 
-### Description
-Yanlış e-mail formatı ilə qeydiyyatdan keçmək.
+## 📌 Description
 
-### Steps
-1. Simplifai frontend-də qeydiyyat səhifəsinə keçid etdim
-2. Invalid e-mail – “leman123.qrbgmail.com” daxil etdim
-3. Valid name – “Leman” daxil etdim
-4. Valid password – “LDA0700fr@” daxil etdim
-5. Password-u yenidən daxil etdim
-6. SMPLIFAI's Terms of Use and Privacy Policy checkbox hissəsini qəbul etdim
-7. “Create an account” buttonuna klik etdim
+Verify the registration process using an invalid email format.
 
-### Expected Result
-Sistem yanlış e-mail formatını aşkarlamalı və qeydiyyat prosesini dayandırmalıdır.
+## 📝 Steps
 
-### Actual Result
-Sistem hesab yaratmadı və e-mail formatının yanlış olduğuna aid validation error mesajı göstərildi.
+1. Open the Simplifai registration page.
+2. Enter an invalid email: **leman123.qrbgmail.com**
+3. Enter a valid first name: **Leman**
+4. Enter a valid password: **LDA0700fr@**
+5. Confirm the password.
+6. Accept the Terms of Use and Privacy Policy.
+7. Click **Create an account**.
 
-### Database Check
+## ✅ Expected Result
+
+The system should detect the invalid email format and prevent registration.
+
+## ❌ Actual Result
+
+The account was not created, and an email validation error message was displayed.
+
+## 🗄️ Database Verification
+
 ```sql
-SELECT * FROM profiles 
+SELECT * FROM profiles
 WHERE first_name = 'Leman';
 ```
 
-Result:
+**Result**
+
 ```text
-No data is found in the database because the account was not created due to the invalid e-mail address format.
+No records were found because the account was not created due to the invalid email format.
 
 Test Date: 2026-05-09
 ```
 
+**Status:** ✅ PASS
+
 ---
 
-## 3. Profildəki məlumatları dəyişdirmək
+# 3️⃣ Update Profile Information
 
-### Description
-Adımı dəyişdirərək profilimi yenilədim.
+## 📌 Description
 
-### Steps
-1. Simplifai frontend-də “Profile” bölməsinə keçid etdim
-2. Adımı dəyişdirib, soyadımı olduğu kimi saxladım
-3. Nömrəni olduğu kimi saxladım
-4. “Send code” buttonuna klik etdim
-5. E-maili olduğu kimi saxladım
-6. “Save changes” buttonuna klik etdim
+Verify that profile information can be updated successfully.
 
-### Expected Result
-Profil uğurla yenilənməlidir.
+## 📝 Steps
 
-### Actual Result
-“Profile updated successfully!” bildirisi ekranda göründü.
+1. Navigate to the **Profile** page.
+2. Change the first name.
+3. Keep the last name unchanged.
+4. Keep the phone number unchanged.
+5. Click **Send Code**.
+6. Leave the email unchanged.
+7. Click **Save Changes**.
 
-### Database Check
+## ✅ Expected Result
+
+The profile should be updated successfully.
+
+## ❌ Actual Result
+
+The message **"Profile updated successfully!"** was displayed.
+
+## 🗄️ Database Verification
+
 ```sql
-Select * from profiles where first_name = 'Lale';
+SELECT * FROM profiles
+WHERE first_name = 'Lale';
 ```
 
-Result:
+**Result**
+
 ```text
-a3c38e71-9784-4b8c-81af-9692a2aa8373 id-də istifadəçi mövcuddur.
+The user exists with ID:
+
+a3c38e71-9784-4b8c-81af-9692a2aa8373
 ```
+
+**Status:** ✅ PASS
 
 ---
 
-## 4. Log out from the system
+# 4️⃣ Log Out from the System
 
-### Description
-İstifadəçinin sistemdən uğurla çıxış etməsini yoxlamaq.
+## 📌 Description
 
-### Steps
-1. Simplifai frontend-də hesabıma daxil oldum
-2. “Profile” bölməsinə keçid etdim
-3. “Log out” buttonuna klik etdim
+Verify that the user can successfully log out.
 
-### Expected Result
-İstifadəçi sistemdən uğurla çıxış etməli və login səhifəsinə yönləndirilməlidir.
+## 📝 Steps
 
-### Actual Result
-İstifadəçi sessiyası sonlandırıldı və istifadəçi login səhifəsinə yönləndirildi.
+1. Log in to Simplifai.
+2. Open the **Profile** page.
+3. Click the **Log Out** button.
 
-### Database Check
+## ✅ Expected Result
+
+The user should be logged out and redirected to the login page.
+
+## ❌ Actual Result
+
+The user session was terminated successfully, and the login page was displayed.
+
+## 🗄️ Database Verification
+
 ```sql
-SELECT * FROM profiles 
+SELECT * FROM profiles
 WHERE first_name = 'Leman';
 ```
 
-Result:
+**Result**
+
 ```text
-User is not found in active data because the user successfully logged out from the system.
+The user is no longer present in the active session because logout was completed successfully.
 
 Test Date: 2026-05-09
 ```
 
+**Status:** ✅ PASS
+
 ---
 
-## 5. “Sign in with Google” with valid data
+# 5️⃣ Sign In with Google
 
-### Description
-Google vasitəsilə valid Google hesabı ilə sayta giriş etmək.
+## 📌 Description
 
-### Steps
-1. Simplifai frontend-də login səhifəsinə keçid etdim
-2. “Sign in with Google” buttonuna klik etdim
-3. Valid Google hesabı – “lilithate601@gmail.com” seçdim
-4. Valid phone number – “0559448073” daxil etdim
-5. “Confirm” buttonuna klik etdim
+Verify successful login using a valid Google account.
 
-### Expected Result
-İstifadəçinin hesabı yaradılmalı və uğurla sayta daxil olmalıdır.
+## 📝 Steps
 
-### Actual Result
-İstifadəçinin hesabı yaradıldı və uğurla sayta daxil oldu.
+1. Open the login page.
+2. Click **Sign in with Google**.
+3. Select the Google account **lilithate601@gmail.com**.
+4. Enter the phone number **0559448073**.
+5. Click **Confirm**.
 
-### Database Check
+## ✅ Expected Result
+
+The user account should be created (if necessary) and successfully signed in.
+
+## ❌ Actual Result
+
+The account was created successfully, and the user logged in.
+
+## 🗄️ Database Verification
+
 ```sql
-Select * from profiles where first_name = 'Lilith';
+SELECT * FROM profiles
+WHERE first_name = 'Lilith';
 ```
 
-Result:
+**Result**
+
 ```text
-fb5d2633-580a-4683-9ed9-d42d23a84b43 id-yə sahib istifadəçi mövcuddur.
+User exists with ID:
+
+fb5d2633-580a-4683-9ed9-d42d23a84b43
 ```
+
+**Status:** ✅ PASS
 
 ---
 
-## 6. Log in with an invalid password
+# 6️⃣ Log In with an Invalid Password
 
-### Description
-Yanlış şifrə ilə sistemə giriş etmək.
+## 📌 Description
 
-### Steps
-1. Simplifai frontend-də login səhifəsinə keçid etdim
-2. Valid e-mail – “moonloor22@gmail.com” daxil etdim
-3. Invalid password – “1234679sd” daxil etdim
-4. “Log in” buttonuna klik etdim
+Verify system behavior when an incorrect password is entered.
 
-### Expected Result
-Sistem “Invalid login credentials” error mesajı göstərməli və istifadəçi sistemə daxil olmamalıdır.
+## 📝 Steps
 
-### Actual Result
-“Invalid login credentials” error mesajı göstərildi və istifadəçi sistemə daxil ola bilmədi.
+1. Open the login page.
+2. Enter the email **moonloor22@gmail.com**.
+3. Enter the invalid password **1234679sd**.
+4. Click **Log In**.
 
-### Database Check
+## ✅ Expected Result
+
+The system should display the **"Invalid login credentials"** error message and deny access.
+
+## ❌ Actual Result
+
+The expected error message was displayed, and the user could not log in.
+
+## 🗄️ Database Verification
+
 ```sql
 SELECT * FROM profiles
 WHERE email = 'leman.qrb@gmail.com';
 ```
 
-Result:
+**Result**
+
 ```text
-User exists in the database, but login is not successful because the entered password is invalid.
+The user exists in the database, but authentication failed because the entered password was incorrect.
 
 Test Date: 2026-05-09
 ```
 
+**Status:** ✅ PASS
+
 ---
 
-## 7. Yanlış format ilə profil məlumatlarını dəyişmək
+# 7️⃣ Update Profile with Invalid Input
 
-### Description
-Ad hissəsinə xüsusi simvollar daxil edərək profil məlumatlarını yeniləmək.
+## 📌 Description
 
-### Steps
-1. Simplifai frontend-də “Profile” bölməsinə keçid etdim
-2. Ad hissəsinə “#$%&*” daxil etdim
-3. Nömrəni olduğu kimi saxladım
-4. “Send code” buttonuna klik etdim
-5. E-maili olduğu kimi saxladım
-6. “Save changes” buttonuna klik etdim
+Verify validation when special characters are entered into the first name field.
 
-### Expected Result
-Error mesajı görünməlidir. Hərf yazılmalı olan hissəyə xüsusi simvollar daxil edilmişdir.
+## 📝 Steps
 
-### Actual Result
+1. Open the **Profile** page.
+2. Enter **#$%&*** as the first name.
+3. Keep the phone number unchanged.
+4. Click **Send Code**.
+5. Leave the email unchanged.
+6. Click **Save Changes**.
+
+## ✅ Expected Result
+
+The system should reject the input and display a validation error message.
+
+## ❌ Actual Result
 
 ```diff
-- “Profile updated successfully!” bildirisi ekranda görsəndi.
+- "Profile updated successfully!" was displayed.
 ```
 
-### Database Check
+## 🗄️ Database Verification
+
 ```sql
-Select * from profiles where first_name = '#$%&*';
+SELECT * FROM profiles
+WHERE first_name = '#$%&*';
 ```
 
-Result:
+**Result**
+
 ```text
-a3c38e71-9784-4b8c-81af-9692a2aa8373 id-sinə sahib istifadəçi mövcuddur.
+The user exists with ID:
+
+a3c38e71-9784-4b8c-81af-9692a2aa8373
 ```
+
+**Status:** ❌ FAIL
 
 ---
 
-## 8. Düzgün məlumatlarla “New Application” yaratmaq
+# 8️⃣ Create a New Application with Valid Data
 
-### Description
-Valid məlumatlarla “New Application” buttonundan istifadə edərək yeni tətbiq yaratmaq.
+## 📌 Description
 
-### Steps
-1. Simplifai frontend-də Dashboard hissəsinə keçid etdim
-2. “New Application” buttonuna klik etdim
-3. E-mail və telefon nömrəmi daxil etdim
-4. “Choose” buttonuna klik etdim
-5. Şəkil yerləşdirdim
-6. “Submit passport to review” buttonuna klik etdim
-7. First name və last name hissələrini valid data ilə doldurdum
-8. “Approve” buttonuna klik etdim
+Verify that a new application can be created using valid information.
 
-### Expected Result
-Yeni tətbiq uğurla yaradılmalıdır.
+## 📝 Steps
 
-### Actual Result
-İstifadəçi valid məlumatlarla yeni tətbiq yaratdı və tətbiq uğurla dashboard/history bölməsində görüntüləndi.
+1. Open the **Dashboard**.
+2. Click **New Application**.
+3. Enter a valid email and phone number.
+4. Click **Choose**.
+5. Upload an image.
+6. Click **Submit Passport to Review**.
+7. Fill in the first name and last name.
+8. Click **Approve**.
 
-### Database Check
+## ✅ Expected Result
+
+A new application should be created successfully.
+
+## ❌ Actual Result
+
+The application was successfully created and appeared in the Dashboard/History section.
+
+## 🗄️ Database Verification
+
 ```sql
-Select * from applications where created_at = '2026-05-27 15:56:12.376057+00';
+SELECT * FROM applications
+WHERE created_at = '2026-05-27 15:56:12.376057+00';
 ```
 
-Result:
+**Result**
+
 ```text
-6051ddcc-1afd-41a4-9db8-f587e3a4213e id-yə sahib yeni tətbiq mövcuddur.
+Application exists with ID:
+
+6051ddcc-1afd-41a4-9db8-f587e3a4213e
 ```
+
+**Status:** ✅ PASS
 
 ---
 
-## 9. Yanlış məlumat formatı ilə tətbiq yaratmaq
+# 9️⃣ Create a New Application with Invalid Phone Number
 
-### Description
-Yanlış məlumat formatı ilə “New Application” buttonundan istifadə edərək yeni tətbiq yaratmaq.
+## 📌 Description
 
-### Steps
-1. Simplifai frontend-də Dashboard bölməsinə keçdim
-2. “New Application” buttonuna klik etdim
-3. E-mailimi düzgün məlumatlarla daxil etdim
-4. Telefon nömrəmi rəqəmlər əvəzinə xüsusi simvollarla doldurdum
-5. “Choose” buttonuna klik etdim
-6. Şəkil yerləşdirdim
-7. “Submit Documents” buttonuna klik etdim
+Verify validation when an invalid phone number format is entered.
 
-### Expected Result
-Error mesajı görünməlidir.
+## 📝 Steps
 
-### Actual Result
+1. Open the **Dashboard**.
+2. Click **New Application**.
+3. Enter a valid email.
+4. Enter special characters instead of a phone number.
+5. Click **Choose**.
+6. Upload an image.
+7. Click **Submit Documents**.
+
+## ✅ Expected Result
+
+The system should reject the request and display a validation error.
+
+## ❌ Actual Result
 
 ```diff
-- “Enrollment Agreement” application-u yaradıldı.
+- The "Enrollment Agreement" application was created successfully.
 ```
 
-### Database Check
+## 🗄️ Database Verification
+
 ```sql
-Select * from applications where phone = '+44@#$%^&*()';
+SELECT * FROM applications
+WHERE phone = '+44@#$%^&*()';
 ```
 
-Result:
+**Result**
+
 ```text
-8c172506-d34f-4d5a-b2d3-eb9f613882db id-yə sahib yeni tətbiq mövcuddur.
+Application exists with ID:
+
+8c172506-d34f-4d5a-b2d3-eb9f613882db
 ```
+
+**Status:** ❌ FAIL
 
 ---
 
-## 10. History bölməsində PDF faylının düzgün yüklənməsinin yoxlanılması
+# 🔟 Verify PDF Download from the History Page
 
-### Description
-History bölməsində PDF faylının düzgün şəkildə yüklənib-yüklənmədiyini yoxlamaq.
+## 📌 Description
 
-### Steps
-1. Simplifai frontend-də History bölməsinə keçid etmək
-2. “Application history”-dan hər hansısa bir application sənədinin yanında yerləşən PDF yükləmə işarəsinin üzərinə klik etmək
+Verify that PDF files can be downloaded successfully from the **History** page.
 
-### Expected Result
-PDF-in yükləndiyinə aid bildiriş gəlməlidir.
+## 📝 Steps
 
-### Actual Result
-Ekranda PDF-in yükləndiyini göstərən bildiriş görsəndi.
+1. Open the **History** page.
+2. In **Application History**, click the PDF download icon next to any application.
+
+## ✅ Expected Result
+
+The PDF file should download successfully, and a download confirmation should appear.
+
+## ❌ Actual Result
+
+A confirmation notification indicating that the PDF was downloaded successfully was displayed.
+
+**Status:** ✅ PASS
