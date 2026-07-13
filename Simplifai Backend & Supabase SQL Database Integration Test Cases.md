@@ -1,17 +1,28 @@
-# Simplifai Backend API Test Cases Report
+# 🔗 Simplifai Backend API Test Cases Report
 
 ---
 
-## 1. GET /applications — Müraciət siyahısı (login with bearer token)
+# 1️⃣ GET /applications — Retrieve Application List (Authenticated User)
 
-### Request
+## 📌 Description
+
+Verify that an authenticated user can retrieve the list of applications using a valid Bearer token.
+
+## 🌐 Request
+
 ```http
-GET https://smplifai-backend.vercel.app/api/applications
+GET /api/applications
+Authorization: Bearer <valid_token>
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The API should return **200 OK** and a list of applications belonging to the authenticated user.
+
+## ❌ Actual Result
+
 ```json
-Status code: 200 OK
+Status Code: 200 OK
 
 [
   {
@@ -20,34 +31,42 @@ Status code: 200 OK
     "type": "Enrollment Agreement",
     "email": "leman.qrb@gmail.com",
     "phone": "+4488866625",
-    "passport_data": {},
-    "file_url": "https://tcrdbtaksnqezkbzgfys.supabase.co/storage/v1/object/public/passports/a3c38e71-9784-4b8c-81af-9692a2aa8373-1779897441566.pdf",
-    "status": "documents_uploaded",
-    "created_at": "2026-05-27T15:57:21.96399+00:00",
-    "updated_at": "2026-05-27T15:57:21.96399+00:00",
-    "documents_uploaded": true,
-    "filled_form_url": null
+    "status": "documents_uploaded"
   }
 ]
 ```
 
-### Database Check
+## 🗄️ Database Verification
+
 ```sql
-Select * from applications where id='ead61859-f979-4283-9f95-4a50409216b1';
+SELECT * FROM applications
+WHERE id = 'ead61859-f979-4283-9f95-4a50409216b1';
 ```
+
+**Status:** ✅ PASS
 
 ---
 
-## 2. GET /applications — Bearer tokensiz yoxlanış
+# 2️⃣ GET /applications — Without Bearer Token
 
-### Request
+## 📌 Description
+
+Verify authorization when no Bearer token is provided.
+
+## 🌐 Request
+
 ```http
-GET https://smplifai-backend.vercel.app/api/applications
+GET /api/applications
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The API should reject the request with **401 Unauthorized**.
+
+## ❌ Actual Result
+
 ```json
-Status code: 401 Unauthorized
+Status Code: 401 Unauthorized
 
 {
   "success": false,
@@ -55,64 +74,84 @@ Status code: 401 Unauthorized
 }
 ```
 
+**Status:** ✅ PASS
+
 ---
 
-## 3. POST /applications — Yeni application yaratmaq
+# 3️⃣ POST /applications — Create a New Application
 
-### Request
+## 📌 Description
+
+Verify that a new application can be created successfully.
+
+## 🌐 Request
+
 ```http
-POST https://smplifai-backend.vercel.app/api/applications
+POST /api/applications
 ```
 
 ### Body
+
 ```json
 {
   "type": "My application"
 }
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+A new application should be created and returned with **201 Created**.
+
+## ❌ Actual Result
+
 ```json
-Status code: 201 Created
+Status Code: 201 Created
 
 {
   "id": "ef7a2867-3c5d-4475-aea9-aceb7681ef5d",
-  "user_id": "a3c38e71-9784-4b8c-81af-9692a2aa8373",
-  "type": "My application",
-  "email": null,
-  "phone": null,
-  "passport_data": null,
-  "file_url": null,
-  "status": "DRAFT",
-  "created_at": "2026-05-15T15:24:51.323321+00:00",
-  "updated_at": "2026-05-15T15:24:51.323321+00:00"
+  "status": "DRAFT"
 }
 ```
 
-### Database Check
+## 🗄️ Database Verification
+
 ```sql
-Select * from applications where id='ef7a2867-3c5d-4475-aea9-aceb7681ef5d';
+SELECT * FROM applications
+WHERE id = 'ef7a2867-3c5d-4475-aea9-aceb7681ef5d';
 ```
+
+**Status:** ✅ PASS
 
 ---
 
-## 4. POST /applications — Endpoint natamam yazılaraq yoxlanış
+# 4️⃣ POST /applications — Invalid Endpoint
 
-### Request
+## 📌 Description
+
+Verify the API response when an incorrect endpoint is requested.
+
+## 🌐 Request
+
 ```http
-POST https://smplifai-backend.vercel.app/api/applicatio
+POST /api/applicatio
 ```
 
 ### Body
+
 ```json
 {
   "type": "Tests"
 }
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The API should return **404 Not Found**.
+
+## ❌ Actual Result
+
 ```json
-Status code: 404 Not Found
+Status Code: 404 Not Found
 
 {
   "success": false,
@@ -121,48 +160,60 @@ Status code: 404 Not Found
 }
 ```
 
+**Status:** ✅ PASS
+
 ---
 
-## 5. POST /applications/submit — Tam müraciət göndərmək
+# 5️⃣ POST /applications/submit — Submit an Application
 
-### Request
+## 📌 Description
+
+Verify that a completed application can be submitted successfully.
+
+## 🌐 Request
+
 ```http
-POST https://smplifai-backend.vercel.app/api/applications/submit
+POST /api/applications/submit
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The application should be created with **Pending** status.
+
+## ❌ Actual Result
+
 ```json
-Status code: 201 Created
+Status Code: 201 Created
 
 {
-  "id": "bcc1edb0-a934-4d35-931f-24799f5ef29c",
-  "user_id": "a3c38e71-9784-4b8c-81af-9692a2aa8373",
-  "type": "My Passport",
-  "email": "lexi@example.com",
-  "phone": "+994501234567",
-  "passport_data": {
-    "surname": "Doe",
-    "firstName": "Lexi"
-  },
-  "file_url": "https://tcrdbtaksnqezkbzgfys.supabase.co/storage/v1/object/public/passports/a3c38e71-9784-4b8c-81af-9692a2aa8373-1778942992023.pdf",
-  "status": "pending",
-  "created_at": "2026-05-16T14:49:52.813016+00:00",
-  "updated_at": "2026-05-16T14:49:52.813016+00:00"
+  "status": "pending"
 }
 ```
 
+**Status:** ✅ PASS
+
 ---
 
-## 6. POST /applications/submit — Bearer tokensiz yoxlanış
+# 6️⃣ POST /applications/submit — Without Bearer Token
 
-### Request
+## 📌 Description
+
+Verify authorization when submitting without authentication.
+
+## 🌐 Request
+
 ```http
-POST https://smplifai-backend.vercel.app/api/applications/submit
+POST /api/applications/submit
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The API should return **401 Unauthorized**.
+
+## ❌ Actual Result
+
 ```json
-Status code: 401 Unauthorized
+Status Code: 401 Unauthorized
 
 {
   "success": false,
@@ -170,45 +221,58 @@ Status code: 401 Unauthorized
 }
 ```
 
----
-
-## 7. GET /applications/{id} — Valid ID ilə tək müraciət
-
-### Request
-```http
-GET https://smplifai-backend.vercel.app/api/applications/7162f485-07a7-4679-ba5b-58062b27e55a
-```
-
-### Actual Result
-```json
-Status code: 200 OK
-
-{
-  "id": "7162f485-07a7-4679-ba5b-58062b27e55a",
-  "user_id": "a3c38e71-9784-4b8c-81af-9692a2aa8373",
-  "type": "My Passport",
-  "email": null,
-  "phone": null,
-  "passport_data": null,
-  "file_url": null,
-  "status": "DRAFT",
-  "created_at": "2026-04-21T00:12:40.091239+00:00",
-  "updated_at": "2026-04-21T00:12:40.091239+00:00"
-}
-```
+**Status:** ✅ PASS
 
 ---
 
-## 8. GET /applications/{id} — Invalid ID ilə yoxlanış
+# 7️⃣ GET /applications/{id} — Valid Application ID
 
-### Request
+## 📌 Description
+
+Verify that a single application can be retrieved using a valid ID.
+
+## 🌐 Request
+
 ```http
-GET https://smplifai-backend.vercel.app/api/applications/7162f485-07a7-4679-ba5b-58062b27
+GET /api/applications/{id}
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The API should return **200 OK** and the requested application.
+
+## ❌ Actual Result
+
 ```json
-Status code: 404 Not Found
+Status Code: 200 OK
+```
+
+Application data was returned successfully.
+
+**Status:** ✅ PASS
+
+---
+
+# 8️⃣ GET /applications/{id} — Invalid Application ID
+
+## 📌 Description
+
+Verify API behavior when an invalid application ID is requested.
+
+## 🌐 Request
+
+```http
+GET /api/applications/{invalid_id}
+```
+
+## ✅ Expected Result
+
+The API should return **404 Not Found**.
+
+## ❌ Actual Result
+
+```json
+Status Code: 404 Not Found
 
 {
   "success": false,
@@ -216,32 +280,56 @@ Status code: 404 Not Found
 }
 ```
 
----
-
-## 9. DELETE /applications/{id} — Valid ID ilə müraciəti silmək
-
-### Request
-```http
-DELETE https://smplifai-backend.vercel.app/api/applications/ec9cc86e-d6c7-4098-a84e-d177dd6727c7
-```
-
-### Actual Result
-```json
-Status code: 204 No Content
-```
+**Status:** ✅ PASS
 
 ---
 
-## 10. DELETE /applications/{id} — Invalid ID ilə müraciəti silmək
+# 9️⃣ DELETE /applications/{id} — Valid Application ID
 
-### Request
+## 📌 Description
+
+Verify that an application can be deleted successfully.
+
+## 🌐 Request
+
 ```http
-DELETE https://smplifai-backend.vercel.app/api/applications/12346abc
+DELETE /api/applications/{id}
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The API should delete the application and return **204 No Content**.
+
+## ❌ Actual Result
+
+```http
+Status Code: 204 No Content
+```
+
+**Status:** ✅ PASS
+
+---
+
+# 🔟 DELETE /applications/{id} — Invalid Application ID
+
+## 📌 Description
+
+Verify API behavior when deleting an application using an invalid UUID.
+
+## 🌐 Request
+
+```http
+DELETE /api/applications/12346abc
+```
+
+## ✅ Expected Result
+
+The API should reject the invalid ID with a client error.
+
+## ❌ Actual Result
+
 ```json
-Status code: 500 Internal Server Error
+Status Code: 500 Internal Server Error
 
 {
   "success": false,
@@ -249,51 +337,76 @@ Status code: 500 Internal Server Error
 }
 ```
 
+**Status:** ❌ FAIL
+
 ---
 
-## 11. PATCH /applications/{id}/status — Status dəyişmək
+# 1️⃣1️⃣ PATCH /applications/{id}/status — Update Status
 
-### Request
+## 📌 Description
+
+Verify that an application's status can be updated.
+
+## 🌐 Request
+
 ```http
-PATCH https://smplifai-backend.vercel.app/api/applications/bfd00da0-5df6-4783-87da-95b7006e1945/status
+PATCH /api/applications/{id}/status
 ```
 
 ### Body
+
 ```json
 {
   "status": "DRAFT"
 }
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The application status should be updated successfully.
+
+## ❌ Actual Result
+
 ```json
-Status code: 200 OK
+Status Code: 200 OK
 
 {
-  "id": "bfd00da0-5df6-4783-87da-95b7006e1945",
   "status": "DRAFT"
 }
 ```
 
+**Status:** ✅ PASS
+
 ---
 
-## 12. PATCH /applications/{id}/status — Status boş göndərərək yoxlama
+# 1️⃣2️⃣ PATCH /applications/{id}/status — Empty Status
 
-### Request
+## 📌 Description
+
+Verify validation when an empty status value is submitted.
+
+## 🌐 Request
+
 ```http
-PATCH https://smplifai-backend.vercel.app/api/applications/616413fb-fd41-4ca6-9b9a-177ecd6534f9/status
+PATCH /api/applications/{id}/status
 ```
 
 ### Body
+
 ```json
 {
   "status": " "
 }
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The API should reject the request with a validation error.
+
+## ❌ Actual Result
+
 ```json
-Status code: 404 Not Found
+Status Code: 404 Not Found
 
 {
   "success": false,
@@ -301,65 +414,58 @@ Status code: 404 Not Found
 }
 ```
 
----
-
-## 13. PATCH /applications/{id}/passport — Passport məlumatlarını yeniləmək
-
-### Request
-```http
-PATCH https://smplifai-backend.vercel.app/api/applications/bfd00da0-5df6-4783-87da-95b7006e1945/passport
-```
-
-### Body
-```json
-{
-  "passport_data": {
-    "firstName": "Dakota",
-    "surname": "Doe",
-    "passportNo": "A1234567",
-    "dateOfIssue": "2020-01-01",
-    "sex": "M",
-    "nationality": "ENG",
-    "dateOfExpiry": "2030-01-01",
-    "dateOfBirth": "1990-01-01",
-    "code": "AZE",
-    "personalNo": "1ZV234A"
-  }
-}
-```
-
-### Actual Result
-```json
-Status code: 200 OK
-
-{
-  "passport_data": {
-    "sex": "M",
-    "code": "AZE",
-    "surname": "Doe",
-    "firstName": "Dakota",
-    "passportNo": "A1234567",
-    "personalNo": "1ZV234A",
-    "dateOfBirth": "1990-01-01",
-    "dateOfIssue": "2020-01-01",
-    "nationality": "ENG",
-    "dateOfExpiry": "2030-01-01"
-  }
-}
-```
+**Status:** ❌ FAIL
 
 ---
 
-## 14. PATCH /applications/{id}/passport — Bearer tokensiz yoxlanış
+# 1️⃣3️⃣ PATCH /applications/{id}/passport — Update Passport Information
 
-### Request
+## 📌 Description
+
+Verify that passport information can be updated successfully.
+
+## 🌐 Request
+
 ```http
-PATCH https://smplifai-backend.vercel.app/api/applications/bfd00da0-5df6-4783-87da-95b7006e1945/passport
+PATCH /api/applications/{id}/passport
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+Passport information should be updated successfully.
+
+## ❌ Actual Result
+
 ```json
-Status code: 401 Unauthorized
+Status Code: 200 OK
+```
+
+Passport information was updated successfully.
+
+**Status:** ✅ PASS
+
+---
+
+# 1️⃣4️⃣ PATCH /applications/{id}/passport — Without Bearer Token
+
+## 📌 Description
+
+Verify authorization when updating passport information without authentication.
+
+## 🌐 Request
+
+```http
+PATCH /api/applications/{id}/passport
+```
+
+## ✅ Expected Result
+
+The API should return **401 Unauthorized**.
+
+## ❌ Actual Result
+
+```json
+Status Code: 401 Unauthorized
 
 {
   "success": false,
@@ -367,34 +473,58 @@ Status code: 401 Unauthorized
 }
 ```
 
----
-
-## 15. GET /applications/{id}/pdf — PDF yükləmək
-
-### Request
-```http
-GET https://smplifai-backend.vercel.app/api/applications/ef7a2867-3c5d-4475-aea9-aceb7681ef5d/pdf
-```
-
-### Actual Result
-```json
-Status code: 200 OK
-
-Download file
-```
+**Status:** ✅ PASS
 
 ---
 
-## 16. GET /applications/{id}/pdf — ID daxilində boşluq ilə yoxlama
+# 1️⃣5️⃣ GET /applications/{id}/pdf — Download PDF
 
-### Request
+## 📌 Description
+
+Verify that the generated PDF can be downloaded.
+
+## 🌐 Request
+
 ```http
-GET https://smplifai-backend.vercel.app/api/applications/ef7a2867-3c5d-4475-aea9-aceb7681ef%205d/pdf
+GET /api/applications/{id}/pdf
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The PDF file should be downloaded successfully.
+
+## ❌ Actual Result
+
+```http
+Status Code: 200 OK
+
+File downloaded successfully.
+```
+
+**Status:** ✅ PASS
+
+---
+
+# 1️⃣6️⃣ GET /applications/{id}/pdf — Invalid ID Format
+
+## 📌 Description
+
+Verify API behavior when the application ID contains invalid characters.
+
+## 🌐 Request
+
+```http
+GET /api/applications/{invalid_id}/pdf
+```
+
+## ✅ Expected Result
+
+The API should reject the request with an error.
+
+## ❌ Actual Result
+
 ```json
-Status code: 500 Internal Server Error
+Status Code: 500 Internal Server Error
 
 {
   "success": false,
@@ -402,61 +532,96 @@ Status code: 500 Internal Server Error
 }
 ```
 
+**Status:** ❌ FAIL
+
 ---
 
-## 17. POST /ocr/passport — Passport OCR yoxlanışı
+# 1️⃣7️⃣ POST /ocr/passport — Passport OCR
 
-### Request
+## 📌 Description
+
+Verify OCR processing using a valid passport image.
+
+## 🌐 Request
+
 ```http
-POST https://smplifai-backend.vercel.app/api/ocr/passport
+POST /api/ocr/passport
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+Passport data should be extracted successfully.
+
+## ❌ Actual Result
 
 ```diff
-- Status code: 500 Failed to process image
+- Status Code: 500 Internal Server Error
 -
-- {
--   "error": "Failed to process image",
--   "details": "Your credit balance is too low to access the Anthropic API."
-- }
+- Failed to process image
+-
+- Your credit balance is too low to access the Anthropic API.
 ```
+
+**Status:** ❌ FAIL
 
 ---
 
-## 18. POST /ocr/passport — Empty image ilə yoxlanış
+# 1️⃣8️⃣ POST /ocr/passport — Empty Image
 
-### Request
+## 📌 Description
+
+Verify validation when no image is uploaded.
+
+## 🌐 Request
+
 ```http
-POST https://smplifai-backend.vercel.app/api/ocr/passport
+POST /api/ocr/passport
 ```
 
 ### Body
+
 ```text
-image → Send empty value
+image → Empty
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The API should return a validation error.
+
+## ❌ Actual Result
+
 ```json
-Status code: 400 Bad Request
+Status Code: 400 Bad Request
 
 {
   "error": "No image file provided"
 }
 ```
 
+**Status:** ✅ PASS
+
 ---
 
-## 19. GET /health — Server health check
+# 1️⃣9️⃣ GET /health — Health Check
 
-### Request
+## 📌 Description
+
+Verify that the API health endpoint is operational.
+
+## 🌐 Request
+
 ```http
-GET https://smplifai-backend.vercel.app/api/health
+GET /api/health
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The API should return **200 OK**.
+
+## ❌ Actual Result
+
 ```json
-Status code: 200 OK
+Status Code: 200 OK
 
 {
   "ok": true,
@@ -464,18 +629,30 @@ Status code: 200 OK
 }
 ```
 
+**Status:** ✅ PASS
+
 ---
 
-## 20. GET /health — Endpoint natamam yazılaraq yoxlanış
+# 2️⃣0️⃣ GET /health — Invalid Health Endpoint
 
-### Request
+## 📌 Description
+
+Verify API behavior when an incorrect health endpoint is requested.
+
+## 🌐 Request
+
 ```http
-GET https://smplifai-backend.vercel.app/api/he
+GET /api/he
 ```
 
-### Actual Result
+## ✅ Expected Result
+
+The API should return **404 Not Found**.
+
+## ❌ Actual Result
+
 ```json
-Status code: 404 Not Found
+Status Code: 404 Not Found
 
 {
   "success": false,
@@ -483,3 +660,5 @@ Status code: 404 Not Found
   "path": "/api/he"
 }
 ```
+
+**Status:** ✅ PASS
